@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-const drawerWidth = 240;
+const drawerWidth = 5;
 
 export default makeStyles((theme) => ({
     root: {
@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding:theme.spacing(3),
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
         [theme.breakpoints.down('sm')]: {
