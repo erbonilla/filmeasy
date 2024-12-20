@@ -1,3 +1,5 @@
+
+// sidestyles.js
 import { makeStyles } from '@mui/styles';
 
 const drawerWidth = 240;
@@ -11,5 +13,11 @@ export default makeStyles((theme) => ({
   image: {
     width: '70%',
   },
-  
+  links: {
+    textDecoration: 'none', 
+    color: theme.palette.text.primary,
+  },
+  genreImage: {
+    marginRight: '10px',
+  },
 }));
