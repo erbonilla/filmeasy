@@ -1,10 +1,9 @@
 import React from 'react';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { Box, CircularProgress, useMediaQuery, Typography } from '@mui/material';
-
+import MovieList from '../MovieList/MovieList';
 
 const Movies = () => {
-
     const { data, error, isFetching } = useGetMoviesQuery();
             // console.log(data);
 
@@ -31,7 +30,7 @@ const Movies = () => {
 
     return (
         <div>
-            <h1>Movies page</h1>
+            <MovieList movies={data}/>
         </div>
     );
 };
