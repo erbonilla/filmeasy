@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
   movie: {
     padding: '10px',
+    paddingLeft : '30px',
   },
   links: {
     alignItems: 'center',
@@ -30,4 +31,16 @@ export default makeStyles((theme) => ({
     color: 'black',
     marginTop: '5px',
   },
+  title: {
+    color: theme.palette.text.primary,
+    textOverflow: 'ellipsis',
+    fontSize: '0.845rem',
+    width: '230px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    marginTop: '10px',
+    marginBottom: 0,
+    textAlign: 'center',
+  },
+
 }));
