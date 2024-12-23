@@ -1,24 +1,18 @@
 import { makeStyles } from '@mui/styles';
 
-const drawerWidth = 240;
-  
-  export default makeStyles((theme) => ({
-    moviesContainer: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      overflow: 'auto',
-      [theme.breakpoints.down('sm')]: {
-        justifyContent: 'center',
-      },
+export default makeStyles((theme) => ({
+  moviesContainer: {
+    // Make the container use MUI's Grid with multiple columns
+    // and avoid overwriting with extra scroll unless you really need it
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    scrollbarWidth: 'none', // For Firefox
+    '&::-webkit-scrollbar': {
+      display: 'none',  // For Chrome, Safari, and Opera
     },
-    moviesContainer: {
-      overflow: 'scroll',
-      scrollbarWidth: 'none', // Firefox
-      '&::-webkit-scrollbar': {
-        display: 'none', // Chrome, Safari, and Opera
-      },
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'center',
     },
-
-  }));
-
+  },
+}));
