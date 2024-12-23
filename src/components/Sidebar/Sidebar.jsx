@@ -1,29 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon } from '@mui/material';
+import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import useStyles from './sidestyles'; // Ensure sidestyles.js is in the same folder
-import { Label } from '@mui/icons-material';
+import { useGetGenresQuery } from '../../services/TMDB'; // Ensure the path is correct
+import genreIcons from '../../assets/genres'; // Ensure the path is correct
 
 const redLogo = 'https://i.ibb.co/ft4skBS/logored.png';
 const blueLogo = 'https://i.ibb.co/5K6vdzx/logoblue.png';
 
 const categories = [
-  { Label: 'Popular', value: 'popular' },
-  { Label: 'Top Rated', value: 'top_rated' }, // Added missing comma
-  { Label: 'Upcoming', value: 'upcoming' },    // Added missing comma
-];
-
-const demoCategories = [
-  { Label: 'Comedy', value: 'comedy' },
-  { Label: 'Action', value: 'action' },   // Added missing comma
-  { Label: 'Horror', value: 'horror' },   // Added missing comma
-  { Label: 'Animation', value: 'animation' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Top Rated', value: 'top_rated' },
+  { label: 'Upcoming', value: 'upcoming' },
 ];
 
 const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
   const classes = useStyles();
+  const { data, isFetching } = useGetGenresQuery();
 
   return (
     <>
@@ -39,17 +34,17 @@ const Sidebar = ({ setMobileOpen }) => {
 
       <List>
         <ListSubheader>Categories</ListSubheader>
-        {demoCategories.map(({ Label, value }) => (
+        {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to={`/category/${value}`}>
-            <ListItem button onClick={() => {}}>
-              {/* <ListItemIcon>
-                <img
-                  src={redLogo}
-                  className={classes.genreImage}
-                  height={30}
-                  alt={Label}/>
-              </ListItemIcon> */}
-              <ListItemText primary={Label} />
+            <ListItem onClick={() => {}} button>
+              <ListItemIcon>
+                {genreIcons[label.toLowerCase()] ? (
+                  <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} alt={label} />
+                ) : (
+                  <img src={redLogo} className={classes.genreImage} height={30} alt="default-icon" />
+                )}
+              </ListItemIcon>
+              <ListItemText primary={label} />
             </ListItem>
           </Link>
         ))}
@@ -59,22 +54,31 @@ const Sidebar = ({ setMobileOpen }) => {
 
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {categories.map(({ Label, value }) => (
-          <Link key={value} className={classes.links} to={`/category/${value}`}>
-            <ListItem button onClick={() => {}}>
-              {/* <ListItemIcon>
-                <img
-                  src={redLogo}
-                  className={classes.genreImage}
-                  height={30}
-                  alt={Label}/>
-              </ListItemIcon> */}
-              <ListItemText primary={Label} />
-            </ListItem>
-          </Link>
-        ))}
+        {isFetching ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        ) : data && data.genres ? (
+          data.genres.map(({ name, id }) => (
+            <Link key={id} className={classes.links} to={`/genre/${id}`}>
+              <ListItem onClick={() => {}} button>
+                <ListItemIcon>
+                  {genreIcons[name.toLowerCase()] ? (
+                    <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} alt={name} />
+                  ) : (
+                    <img src={redLogo} className={classes.genreImage} height={30} alt="default-icon" />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
+          ))
+        ) : (
+          <Box display="flex" justifyContent="center">
+            <p>No genres available</p>
+          </Box>
+        )}
       </List>
-
     </>
   );
 };
