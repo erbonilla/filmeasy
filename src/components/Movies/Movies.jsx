@@ -2,9 +2,13 @@ import React from 'react';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import MovieList from '../MovieList/MovieList';
+import { useSelector } from 'react-redux';
 
 const Movies = () => {
-  const { data, error, isFetching } = useGetMoviesQuery();
+  const [page, setPage] = React.useState(1);
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+
+  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page });
 
   if (isFetching) {
     return (
@@ -15,7 +19,11 @@ const Movies = () => {
   }
 
   if (error) {
-    return 'An error has occurred';
+    return (
+      <Box display="flex" justifyContent="center">
+        <Typography variant="h6">An error has occurred: {error.message}</Typography>
+      </Box>
+    );
   }
 
   if (!data || !data.results || !data.results.length) {

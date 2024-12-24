@@ -6,6 +6,10 @@ import Movie from '../Movie/Movie';
 const MovieList = ({ movies }) => {
   const classes = useStyles();
 
+  if (!movies || !movies.results) {
+    return <p>No movies available</p>;
+  }
+
   return (
     <Grid container className={classes.moviesContainer}>
       {movies.results.map((movie, i) => (
