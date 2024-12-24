@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import MovieList from '../MovieList/MovieList';
 import { useSelector } from 'react-redux';
 
 const Movies = () => {
-  const [page, setPage] = React.useState(1);
-  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+  const [page, setPage] = useState(1);
+  const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
 
-  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page });
+  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
 
   if (isFetching) {
     return (
@@ -30,8 +30,8 @@ const Movies = () => {
     return (
       <Box display="flex" alignItems="center" mt="20px">
         <Typography variant="h4">
-          No movies that match your search <br />
-          Please search for something else
+          No movies match your search criteria. <br />
+          Please try again with a different search.
         </Typography>
       </Box>
     );

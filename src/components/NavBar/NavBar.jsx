@@ -6,12 +6,13 @@ import { useTheme } from '@mui/material/styles';
 import useStyles from './navstyles';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
+import Search from '../Search/Search';
 
 const NavBar = () => {
     const classes = useStyles();
     const isMobile = useMediaQuery('(max-width:600px)');
     const theme = useTheme();
-    const isAuthenticated = true; 
+    const isAuthenticated = false; 
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
@@ -38,12 +39,12 @@ const NavBar = () => {
                     </IconButton>
 
                     {/* Only show 'Search..' when not on mobile */}
-                    {!isMobile && 'Search..'}
+                    {!isMobile && <Search/>}
 
                     <div>
                         {/* Show different buttons depending on authentication status */}
                         {!isAuthenticated ? (
-                            <Button color='inherit' onClick={() => {}}>
+                            <Button color='inherit' onClick={fetchToken}>
                                 Login &nbsp; <AccountCircle />
                             </Button>
                         ) : (
@@ -65,7 +66,7 @@ const NavBar = () => {
                     </div>
 
                     {/* Only show 'Search..' when on mobile */}
-                    {isMobile && 'Search..'}
+                    {isMobile && <Search/>}
                 </Toolbar>
             </AppBar>
 
