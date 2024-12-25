@@ -1,3 +1,4 @@
+// MovieList.jsx
 import React from 'react';
 import { Grid } from '@mui/material';
 import useStyles from './movieliststyles';
@@ -11,7 +12,7 @@ const MovieList = ({ movies }) => {
   }
 
   return (
-    <Grid container className={classes.moviesContainer}>
+    <Grid container className={classes.moviesContainer} spacing={3}>
       {movies.results.map((movie, i) => (
         <Movie key={movie.id || i} movie={movie} i={i} />
       ))}

@@ -1,11 +1,12 @@
+// MovieInformation.jsx
 import React from 'react';
 
 const MovieInformation = () => {
-    return (
-        <div>
-            Movie Information
-        </div>
-    );
+  return (
+    <div>
+      Movie Information
+    </div>
+  );
 };
 
 export default MovieInformation;

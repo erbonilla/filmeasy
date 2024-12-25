@@ -1,23 +1,24 @@
-import { makeStyles } from "@mui/styles";
+// styles.js
+import { makeStyles } from '@mui/styles';
 
-const drawerWidth = 0;
+const drawerWidth = 240;
 
 export default makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        height: '100vh',
+  root: {
+    display: 'flex',
+    backgroundColor: theme.palette.background.default,
+  },
+  // Ensures content starts below the 80px-high AppBar
+  toolbar: {
+    height: '80px',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    // Ensure the main area is offset to the right of the drawer on large screens
+    marginTop: '80px',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: drawerWidth,
     },
-    toolbar: {
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding:theme.spacing(3),
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: 0,
-            width: '100%',
-        },
-    },
+  },
 }));

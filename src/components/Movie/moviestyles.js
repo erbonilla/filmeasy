@@ -1,18 +1,13 @@
+// moviestyles.js
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
-  movie: {
-    padding: '10px',
-    paddingLeft : '30px',
-  },
   links: {
     alignItems: 'center',
     fontWeight: 'bolder',
     textDecoration: 'none',
-    [theme.breakpoints.up('xs')]: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
+    display: 'flex',
+    flexDirection: 'column',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -27,11 +22,6 @@ export default makeStyles((theme) => ({
     },
   },
   title: {
-    textAlign: 'center',
-    color: 'black',
-    marginTop: '5px',
-  },
-  title: {
     color: theme.palette.text.primary,
     textOverflow: 'ellipsis',
     fontSize: '0.845rem',
@@ -42,5 +32,4 @@ export default makeStyles((theme) => ({
     marginBottom: 0,
     textAlign: 'center',
   },
-
 }));

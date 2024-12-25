@@ -1,3 +1,4 @@
+// Movies.js
 import React, { useState } from 'react';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import { Box, CircularProgress, Typography } from '@mui/material';
@@ -5,14 +6,21 @@ import MovieList from '../MovieList/MovieList';
 import { useSelector } from 'react-redux';
 
 const Movies = () => {
-  const [page, setPage] = useState(1);
-  const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
+  // If you are not actually using pagination, you can remove setPage
+  const [page] = useState(1);
+  const { genreIdOrCategoryName, searchQuery } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
 
-  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
+  const { data, error, isFetching } = useGetMoviesQuery({
+    genreIdOrCategoryName,
+    page,
+    searchQuery,
+  });
 
   if (isFetching) {
     return (
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center" mt="50px">
         <CircularProgress size="4rem" />
       </Box>
     );
@@ -20,7 +28,7 @@ const Movies = () => {
 
   if (error) {
     return (
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center" mt="50px">
         <Typography variant="h6">An error has occurred: {error.message}</Typography>
       </Box>
     );

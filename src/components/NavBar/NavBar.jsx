@@ -1,103 +1,50 @@
+// NavBar.jsx
 import React from 'react';
-import { useState } from 'react';
-import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
-import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import useStyles from './navstyles';
-import { Link } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
-import Search from '../Search/Search';
+import { fetchToken } from '../../utils';
 
 const NavBar = () => {
-    const classes = useStyles();
-    const isMobile = useMediaQuery('(max-width:600px)');
-    const theme = useTheme();
-    const isAuthenticated = false; 
-    const [mobileOpen, setMobileOpen] = useState(false);
+  const classes = useStyles();
 
-    return (
-        <>
-            <AppBar position='fixed'>
-                <Toolbar className={classes.toolbar}>
-                    {isMobile && (
-                        <IconButton
-                            color='inherit'
-                            edge='start'
-                            style={{ outline: 'none' }}
-                            onClick={() => setMobileOpen((prevMobileOpen) => 
-                                !prevMobileOpen)}
-                            className={classes.menuButton}>
-                            <Menu />
-                        </IconButton>
-                    )}
-                    <IconButton
-                        color='inherit'
-                        sx={{ ml: 1 }}
-                        onClick={() => {}}
-                    >
-                        {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-                    </IconButton>
+  const handleLoginClick = () => {
+    fetchToken(); // Redirect to TMDB login
+  };
 
-                    {/* Only show 'Search..' when not on mobile */}
-                    {!isMobile && <Search/>}
-
-                    <div>
-                        {/* Show different buttons depending on authentication status */}
-                        {!isAuthenticated ? (
-                            <Button color='inherit' onClick={fetchToken}>
-                                Login &nbsp; <AccountCircle />
-                            </Button>
-                        ) : (
-                            <Button
-                                color='inherit'
-                                component={Link}
-                                to={`/profile/:id`}
-                                className={classes.linkButton}
-                                onClick={() => {}}
-                            >
-                                {!isMobile && <>My Movies &nbsp;</>}
-                                <Avatar
-                                    sx={{ width: 30, height: 30 }}
-                                    alt='Profile Image'
-                                    src='https://c8.alamy.com/comp/2G6PJDA/default-avatar-photo-placeholder-grey-profile-picture-icon-business-man-illustration-2G6PJDA.jpg'
-                                />
-                            </Button>
-                        )}
-                    </div>
-
-                    {/* Only show 'Search..' when on mobile */}
-                    {isMobile && <Search/>}
-                </Toolbar>
-            </AppBar>
-
-            {/* Add a margin to the top of the page */}                        
-
-                        <div>
-                        <nav className={classes.drawer}>
-                            {isMobile ? (
-                            <Drawer
-                                variant='temporary'
-                                anchor='right'
-                                open={mobileOpen}
-                                onClose={() => setMobileOpen(prevMobileOpen => 
-                                !prevMobileOpen)}
-                                classes={{ paper: classes.drawerPaper,}}
-                                ModalProps={{ keepMounted: true }}  
-                            >  
-                            <Sidebar setMobileOpen={setMobileOpen}/>
-
-                            </Drawer>
-                            ) : (
-                        <Drawer 
-                        classes={{ paper: classes.drawerPaper,}}
-                        variant='permanent'open>
-                        <Sidebar setMobileOpen={setMobileOpen}/>
-                        </Drawer>
-                        )}
-                    </nav>
-                    </div>
-        </>
-    );
+  return (
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+          Filmeasy
+        </Typography>
+        <div className={classes.loginContainer}>
+          <Button
+            color="inherit"
+            onClick={handleLoginClick}
+            startIcon={<AccountCircle />}
+          >
+            Login
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default NavBar;

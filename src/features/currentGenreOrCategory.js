@@ -1,3 +1,4 @@
+// currentGenreOrCategory.js
 import { createSlice } from '@reduxjs/toolkit';
 
 export const genreOrCategory = createSlice({
@@ -10,11 +11,11 @@ export const genreOrCategory = createSlice({
   reducers: {
     selectGenreOrCategory: (state, action) => {
       state.genreIdOrCategoryName = action.payload;
-      state.searchQuery = ''; // Clear search query when selecting a category
+      state.searchQuery = ''; // Clear search when selecting a category
     },
     searchMovie: (state, action) => {
-      state.searchQuery = action.payload; // Update search query
-      state.genreIdOrCategoryName = ''; // Clear genre/category selection during search
+      state.searchQuery = action.payload; // Update search
+      state.genreIdOrCategoryName = '';   // Clear category if searching
     },
   },
 });
