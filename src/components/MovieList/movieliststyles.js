@@ -1,18 +1,24 @@
-// movieliststyles.js
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
+
+const drawerWidth = 240;
 
 export default makeStyles((theme) => ({
-  moviesContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    // Remove custom scroll styling; let it scroll normally on smaller screens:
-    scrollbarWidth: 'none', // For Firefox
-    '&::-webkit-scrollbar': {
-      display: 'none',       // For Chrome, Safari, Opera
+    moviesContainer:{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        overflow: 'auto',
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+        }
     },
-    [theme.breakpoints.down('sm')]: {
-      justifyContent: 'center',
-    },
-  },
+    moviesContainer:{
+        overflow: 'scroll',
+        scrollbarWidth: 'none', // Firefox
+        '&::-webkit-scrollbar':{
+            display: 'none' // Chrome, safari and opera
+        } 
+    } 
+    
+    
 }));

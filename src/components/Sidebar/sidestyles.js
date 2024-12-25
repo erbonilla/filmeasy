@@ -1,18 +1,23 @@
-// sidestyles.js
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 
 const drawerWidth = 240;
 
 export default makeStyles((theme) => ({
-  drawerPaper: {
-    width: drawerWidth,
-    top: '80px',
-    [theme.breakpoints.down('sm')]: {
-      top: 0,
+    imageLink:{
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '10% 0'
     },
-  },
-  title: {
-    textAlign: 'center',
-    marginTop: theme.spacing(2),
-  },
-}));
+    image: {
+        width: '70%'
+    },
+    links:{
+        color: theme.palette.text.primary,
+        textDecoration: 'none'
+    },
+    genreImage: {
+        filter: theme.palette.mode === 'dark' && 'invert(1)'
+    }
+   
+    
+}));  
