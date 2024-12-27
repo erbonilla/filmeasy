@@ -14,7 +14,7 @@ const useAlan = () => {
 
     useEffect(() => {
         alanBtn({
-            key: '8e0b083e795c924d0f062a79df525cba2e956eca572e1d8b807a3e2338fdd0dc/stage',
+            key: 'a552799e77cd79701fdc0fe69d7f78002e956eca572e1d8b807a3e2338fdd0dc/stage',
             host: 'v1.alan.app',
             onCommand: ({ command, mode, genres, genreOrCategory,query}) => { 
             if (command === 'chooseGenre') {
